@@ -1,0 +1,6 @@
+@KIPService_HostAddress = http://localhost:5299
+
+GET {{KIPService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
