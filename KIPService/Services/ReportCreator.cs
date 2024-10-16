@@ -30,7 +30,6 @@ namespace KIPService.Services
                 }
                 var process_time = configuration.GetValue<int>("ReportExecutionTime");
                 var reports = db.Reports.Where(w => (DateTime.Now - w.InitDate).TotalSeconds >= process_time && w.SignInCount == null);
-                logger.LogWarning($"Found: {reports.Count()}");
                 foreach (var report in reports)
                 {
                     report.SignInCount = Random.Shared.Next(0, 100);

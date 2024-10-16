@@ -1,7 +1,8 @@
-
+﻿
 using KIPService.DbContexts;
 using KIPService.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using System;
 
 namespace KIPService
@@ -17,7 +18,17 @@ namespace KIPService
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(opt =>
+            {
+                opt.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "KIPService API",
+                    Description = "Сервис для получения отчетов (ТЗ)",
+                    Contact = new OpenApiContact() { Name = "$!r", Email = "siddha05.sb@gmail.com" }
+                });
+                opt.IncludeXmlComments($"{Path.Combine(AppContext.BaseDirectory, "ReportAPI.xml")}");
+            });
             builder.Services.AddDbContext<AppDbContext>(opt =>
             {
                 opt.UseNpgsql(builder.Configuration.GetConnectionString("DevConnection"));
