@@ -6,6 +6,9 @@ namespace KIPService.DbContexts
 {
     public class AppDbContext : DbContext
     {
+        /// <summary>
+        /// Отчеты
+        /// </summary>
         public virtual DbSet<Report> Reports { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -19,6 +19,11 @@
             <param name="report_id">Guid запроса</param>
             <returns></returns>
         </member>
+        <member name="P:KIPService.DbContexts.AppDbContext.Reports">
+            <summary>
+            Отчеты
+            </summary>
+        </member>
         <member name="T:KIPService.Migrations.init">
             <inheritdoc />
         </member>
@@ -31,11 +36,42 @@
         <member name="M:KIPService.Migrations.init.BuildTargetModel(Microsoft.EntityFrameworkCore.ModelBuilder)">
             <inheritdoc />
         </member>
+        <member name="P:KIPService.Models.Report.ReportID">
+            <summary>
+            Guid pfghjcf
+            </summary>
+        </member>
+        <member name="P:KIPService.Models.Report.UserID">
+            <summary>
+            Guid пользователя
+            </summary>
+        </member>
+        <member name="P:KIPService.Models.Report.StartDate">
+            <summary>
+            Период с
+            </summary>
+        </member>
+        <member name="P:KIPService.Models.Report.EndDate">
+            <summary>
+            Период по
+            </summary>
+        </member>
+        <member name="P:KIPService.Models.Report.InitDate">
+            <summary>
+            Начало обработки
+            </summary>
+        </member>
+        <member name="P:KIPService.Models.Report.SignInCount">
+            <summary>
+            Данные
+            </summary>
+        </member>
         <member name="M:KIPService.Models.Report.IsProcessing(System.Int32,System.Double@)">
             <summary>
             В обработке?
             </summary>
             <param name="process_time">Время обработки</param>
+            /// <param name="percent">Процент выполнения</param>
             <returns></returns>
         </member>
         <member name="T:KIPService.Services.ReportCreator">

@@ -3,6 +3,7 @@ using KIPService.Helpers;
 using KIPService.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.JSInterop;
 
 namespace KIPService.Controllers
@@ -49,7 +50,7 @@ namespace KIPService.Controllers
             processingTime = processingTime is 0 ? 60 : processingTime;
             if (Guid.TryParse(report_id, out var guid))
             {
-                var report = _db.Reports.FirstOrDefault(s => s.ReportID == guid);
+                var report = await _db.Reports.FirstAsync(s => s.ReportID == guid);
                 if (report is null)
                 {
                     return Results.StatusCode(StatusCodes.Status204NoContent);

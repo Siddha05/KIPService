@@ -9,6 +9,7 @@ namespace KIPService
 {
     public class Program
     {
+#pragma warning disable CS1591
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);

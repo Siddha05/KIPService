@@ -1,5 +1,6 @@
 ﻿
 using KIPService.DbContexts;
+using System.Diagnostics.CodeAnalysis;
 
 namespace KIPService.Services
 {
@@ -12,7 +13,8 @@ namespace KIPService.Services
     public class ReportCreator (IServiceProvider serviceProvider, ILogger<ReportCreator> logger, IConfiguration configuration) : BackgroundService
     {
         private readonly int _scan_period = 5000;
-        
+
+#pragma warning disable CS1591
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             logger.LogInformation($"Start ReportCreator service");
