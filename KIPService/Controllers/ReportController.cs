@@ -14,7 +14,7 @@ namespace KIPService.Controllers
         AppDbContext _db;
 
         /// <summary>
-        /// 
+        /// Добавляет запрос в БД
         /// </summary>
         /// <param name="user_id">Идентификатор пользователя</param>
         /// <param name="from">Начало периода</param>
@@ -33,7 +33,7 @@ namespace KIPService.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Получить запрос из БД
         /// </summary>
         /// <param name="report_id">Guid запроса</param>
         /// <returns></returns>

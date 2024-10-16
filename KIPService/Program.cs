@@ -1,5 +1,6 @@
 
 using KIPService.DbContexts;
+using KIPService.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -20,8 +21,9 @@ namespace KIPService
             builder.Services.AddDbContext<AppDbContext>(opt =>
             {
                 opt.UseNpgsql(builder.Configuration.GetConnectionString("DevConnection"));
-                opt.EnableSensitiveDataLogging();
+                //opt.EnableSensitiveDataLogging();
             });
+            builder.Services.AddHostedService<ReportCreator>();
 
             var app = builder.Build();
 
@@ -33,12 +35,9 @@ namespace KIPService
             }
 
             app.UseHttpsRedirection();
-
             app.UseAuthorization();
-
-
             app.MapControllers();
-
+            
             app.Run();
         }
     }

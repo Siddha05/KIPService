@@ -10,7 +10,7 @@ namespace KIPService.Models
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public DateTime InitDate { get; set; }
-        public int SignInCount { get; set; }
+        public int? SignInCount { get; set; }
 
         /// <summary>
         /// В обработке?
@@ -44,7 +44,7 @@ namespace KIPService.Models
     public class ReportDtoResult
     {
         public string UserID { get; set; }
-        public int CountSignIn { get; set; }
+        public int? CountSignIn { get; set; }
     }
 
     public class ReportDto()

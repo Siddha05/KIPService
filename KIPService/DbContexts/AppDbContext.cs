@@ -14,14 +14,17 @@ namespace KIPService.DbContexts
             modelBuilder.Entity<Report>(p =>
             {
                 p.HasKey(nameof(Report.ReportID));
-                p.Property(s => s.ReportID).HasDefaultValueSql("newsequentialid()");
-                p.Property(s => s.StartDate).HasColumnType("timestamp");
-                p.Property(s => s.EndDate).HasColumnType("timestamp");
-                p.Property(s => s.InitDate).HasColumnType("timestamp");
+                p.Property(s => s.ReportID).ValueGeneratedOnAdd();
+                p.Property(s => s.StartDate).HasColumnType("timestamp without time zone");
+                p.Property(s => s.EndDate).HasColumnType("timestamp without time zone");
+                p.Property(s => s.InitDate).HasColumnType("timestamp without time zone");
             });
 
         }
 
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) 
+        {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+        }
     }
 }
