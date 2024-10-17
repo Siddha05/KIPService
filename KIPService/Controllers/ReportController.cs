@@ -10,16 +10,11 @@ namespace KIPService.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class ReportController : ControllerBase
+    public class ReportController(AppDbContext db) : ControllerBase
     {
-        AppDbContext _db;
-
         /// <summary>
         /// Добавляет запрос в БД
         /// </summary>
-        /// <param name="user_id">Идентификатор пользователя</param>
-        /// <param name="from">Начало периода</param>
-        /// <param name="to">Окончание периода</param>
         /// <response code="200">Успешно</response>
         /// <response code="503">Ошибка сервера</response>
         /// <response code="400">Ошибка API</response>
@@ -28,8 +23,8 @@ namespace KIPService.Controllers
         {
             logger.LogInformation($"Invoke SaveStatistic: {model}");
             var report = new Report(model.UserID, model.StartDate, model.EndDate);
-            await _db.Reports.AddAsync(report);
-            await _db.SaveChangesAsync();
+            await db.Reports.AddAsync(report);
+            await db.SaveChangesAsync();
             return Results.Ok(report.ReportID);
         }
 
@@ -50,7 +45,7 @@ namespace KIPService.Controllers
             processingTime = processingTime is 0 ? 60 : processingTime;
             if (Guid.TryParse(report_id, out var guid))
             {
-                var report = await _db.Reports.FirstOrDefaultAsync(s => s.ReportID == guid);
+                var report = await db.Reports.FirstOrDefaultAsync(s => s.ReportID == guid);
                 if (report is null)
                 {
                     return Results.StatusCode(StatusCodes.Status204NoContent);
@@ -65,7 +60,5 @@ namespace KIPService.Controllers
                 return Results.BadRequest($"Incorrect giud {report_id}");
             }
         }
-
-        public ReportController(AppDbContext db) => _db = db;
     }
 }

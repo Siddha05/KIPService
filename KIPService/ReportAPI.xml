@@ -8,9 +8,6 @@
             <summary>
             Добавляет запрос в БД
             </summary>
-            <param name="user_id">Идентификатор пользователя</param>
-            <param name="from">Начало периода</param>
-            <param name="to">Окончание периода</param>
             <response code="200">Успешно</response>
             <response code="503">Ошибка сервера</response>
             <response code="400">Ошибка API</response>
