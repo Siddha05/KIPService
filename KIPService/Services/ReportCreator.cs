@@ -12,7 +12,7 @@ namespace KIPService.Services
     /// <param name="configuration"></param>
     public class ReportCreator (IServiceProvider serviceProvider, ILogger<ReportCreator> logger, IConfiguration configuration) : BackgroundService
     {
-        private readonly int _scan_period = 5000;
+        private readonly int _scan_period = 1000;
 
 #pragma warning disable CS1591
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
