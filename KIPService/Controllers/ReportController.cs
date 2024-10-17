@@ -20,10 +20,10 @@ namespace KIPService.Controllers
         /// <param name="user_id">Идентификатор пользователя</param>
         /// <param name="from">Начало периода</param>
         /// <param name="to">Окончание периода</param>
+        /// <response code="200">Успешно</response>
+        /// <response code="503">Ошибка сервера</response>
+        /// <response code="400">Ошибка API</response>
         [HttpPost("user_statistics")]
-        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(200)]
         public async Task<IResult> SaveStatistic([FromBody]ReportAddModel model, ILogger<ReportController> logger)
         {
             logger.LogInformation($"Invoke SaveStatistic: {model}");
@@ -38,11 +38,11 @@ namespace KIPService.Controllers
         /// </summary>
         /// <param name="report_id">Guid запроса</param>
         /// <returns></returns>
+        /// <response code="200">Успешно</response>
+        /// <response code="204">Данных нет</response>
+        /// <response code="503">Ошибка сервера</response>
+        /// <response code="400">Ошибка API</response>
         [HttpGet("info")]
-        [ProducesResponseType(StatusCodes.Status503ServiceUnavailable)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(204)]
         public async Task<IResult> GetStatistic([FromQuery]string report_id, IConfiguration configuration, ILogger<ReportController> logger)
         {
             logger.LogInformation($"Invoke GetStatistic {report_id}");
@@ -50,7 +50,7 @@ namespace KIPService.Controllers
             processingTime = processingTime is 0 ? 60 : processingTime;
             if (Guid.TryParse(report_id, out var guid))
             {
-                var report = await _db.Reports.FirstAsync(s => s.ReportID == guid);
+                var report = await _db.Reports.FirstOrDefaultAsync(s => s.ReportID == guid);
                 if (report is null)
                 {
                     return Results.StatusCode(StatusCodes.Status204NoContent);
